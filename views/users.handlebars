@@ -1,0 +1,10 @@
+<h1>Users</h1><hr>
+<ul class="user-list">
+  {{#each users}}
+  <li class="user well">
+    <img src="/public/images/feynman.jpg" alt="">
+    <p><b>@{{username}}</b></p>
+    <a href="" class="btn btn-primary btn-small"><i class="icon-plus icon-white"></i>&nbsp; Follow</a>
+  </li>
+  {{/each}}
+</ul>

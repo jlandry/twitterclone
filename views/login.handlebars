@@ -1,0 +1,9 @@
+<p class="lead">Log In</p>
+{{#if formError }}
+<p class="alert alert-warning">{{{ formError }}}</p>
+{{/if}}
+<form action="" method="POST" accept-charset="utf-8">
+  <input type="text" name="username" value="" placeholder="username"><br/>
+  <input type="password" name="password" value="" placeholder="password"><br/>
+  <input class="btn btn-primary" type="submit" name="" value="Log In">
+</form>

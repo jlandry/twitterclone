@@ -1,0 +1,28 @@
+
+<h1>Your Feed</h1>
+<hr>
+<div class="row">
+  <div class="span5">
+    <ul class="post-feed">
+      {{#each posts}}
+      <li class="post">
+        <img src="/public/images/feynman.jpg">
+        <div class="post-content">
+          <a href="" title="">{{ user.name }}</a>
+          <p>{{ body }}</p>
+        </div>
+      </li>
+      {{/each}}
+    </ul>
+  </div>
+  <div class="span3">
+    {{#if formError }}
+    <p class="alert alert-error">{{{ formError }}}</p>
+    {{/if}}
+    <form action="" method="post" accept-charset="utf-8">
+      <p>Write a new post:</p>
+      <textarea name="postBody"></textarea>
+      <input class="btn btn-primary" type="submit" name="" value="Submit">
+    </form> 
+  </div>
+</div>
