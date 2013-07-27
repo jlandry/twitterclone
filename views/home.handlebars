@@ -5,11 +5,11 @@
 {{#if formError }}
 <p class="alert alert-warning">{{{ formError }}}</p>
 {{/if}}
-<form action="" method="POST" accept-charset="utf-8" enctype="multipart/form-data">
+<form action="" method="POST" enctype="multipart/form-data">
   <input type="text" name="name" value="" placeholder="Name"><br/>
   <input type="text" name="username" value="" placeholder="username"><br/>
   <input type="password" name="password" value="" placeholder="password"><br/>
-  {{! <p>Profile Image</p><input type="file" name="image"><hr> }}
+  <p>Profile Image</p><input type="file" name="image"><hr>
   <input class="btn btn-primary" type="submit" name="" value="Sign Up">
 </form>
 <hr>

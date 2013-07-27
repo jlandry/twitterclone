@@ -6,9 +6,9 @@
     <ul class="post-feed">
       {{#each posts}}
       <li class="post">
-        <img src="/public/images/feynman.jpg">
+        <img class="img-circle" src="{{ user.image }}">
         <div class="post-content">
-          <a href="" title="">{{ user.name }}</a>
+          <p><b>{{ user.name }}</b></p>
           <p>{{ body }}</p>
         </div>
       </li>
@@ -16,6 +16,11 @@
     </ul>
   </div>
   <div class="span3">
+    <div class="user-profile well">
+      <p class="lead">{{ user.name }}</p>
+      <p><b>@{{ user.username }}</b></p>
+      <img class="user-image img-circle" src="{{ user.image }}" alt="">
+    </div>
     {{#if formError }}
     <p class="alert alert-error">{{{ formError }}}</p>
     {{/if}}
