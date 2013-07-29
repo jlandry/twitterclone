@@ -10,5 +10,6 @@ function followUser (userID) {
 }
 
 function userFollowCallback (response) {
-  console.log(response);
+  var userElement = $('#user-'+ response);
+  userElement.find('a').removeClass('btn-primary').addClass('btn-success').html('<i class="icon-white icon-check"></i>&nbsp; Following');
 }

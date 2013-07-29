@@ -3,16 +3,19 @@ var fs = require('fs');
 var _ = require("underscore");
 
 exports.home = function (request, response) {
+  if (request.session.userID) {
+    return response.redirect('/feed');
+  }
+
   if (request.method == 'POST') {
     var name        = request.body.name;
     var username    = request.body.username;
     var password    = request.body.password;
     
     var tmp_path    = request.files.image.path;
-    var target_path = './uploads/images/user/' + request.files.image.name;
-
-    console.log(tmp_path);
-    console.log(target_path);
+    // Set the directory where we want to store the images. 
+    // Make sure to create this directory or it will throw an error.
+    var target_path = './uploads/images/' + request.files.image.name;
 
     if (tmp_path) {
       fs.rename(tmp_path, target_path, function(err) {
@@ -124,10 +127,7 @@ exports.feed = function (request, response) {
   else {
     var userIDs = _.union(request.user.following, [request.user.id]) 
 
-    models.Post.find()
-    .where('user').in(userIDs)
-    .populate('user')
-    .sort('-date')
+    models.Post.find().where('user').in(userIDs).populate('user').sort('-date')
     .exec(function (err, posts) {
       if (err) console.log(err);
       response.render('feed', { 'posts': posts, 'user': request.user });
@@ -136,20 +136,12 @@ exports.feed = function (request, response) {
 }
 
 exports.users = function (request, response) {
-  models.User.find()
-  .where('_id').ne( request.session.userID )
+  models.User.find().where('_id').ne( request.session.userID )
   .exec(function(err, users) {
-    _.each(users, function (user) {
-      // TODO: fix this.
-      console.log(request.user.id);
-      console.log(user.followers);
-      console.log(request.user.id in user.followers);
-      if(request.user.id in user.followers) {
-        user.followed = true;
-      }
-      console.log(user);
+    _.each(users, function (user, i) {
+      user.followed = _.contains(user.followers, request.user.id)
     });
-    response.render('users', { users: users });
+    response.render('users', { users: users }); 
   });
 }
 
@@ -166,7 +158,7 @@ exports.follow = function (request, response) {
       userToFollow.save();
       request.user.save();
 
-      response.end( 'success' );
+      response.end( userToFollow.id );
     });
   }
 }

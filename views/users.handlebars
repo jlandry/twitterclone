@@ -1,11 +1,15 @@
 <h1>Users</h1><hr>
 <ul class="user-list">
   {{#each users}}
-  <li class="user well" data-id="{{ id }}">
+  <li class="user well" id="user-{{ id }}">
     <img class="img-circle" src="{{ image }}" alt="">
     <p class="lead">{{ name }}</p>
     <p><b>@{{ username }}</b></p>
+    {{#if followed}}
+    <a href="javascript:followUser('{{id}}');" class="btn btn-block btn-success btn-small"><i class="icon-check icon-white"></i>&nbsp; Following</a>
+    {{else}}
     <a href="javascript:followUser('{{id}}');" class="btn btn-block btn-primary btn-small"><i class="icon-plus icon-white"></i>&nbsp; Follow</a>
+    {{/if}}
   </li>
   {{/each}}
 </ul>
